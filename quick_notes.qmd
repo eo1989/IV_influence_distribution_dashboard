@@ -1,0 +1,45 @@
+---
+title: "Some quick notes"
+format: html
+jupyter: iv_dist_dash
+execute:
+  cache: true
+  warning: false
+author: "Ernest Orlowski"
+---
+
+```{python}
+from collections.abc import Callable
+
+class Mersennel:
+    def __init__(self, algorithm: Callable[[int], int]) -> None:
+        self.pow2 = algorithm
+
+    def __call__(self, arg: int) -> int:
+        return self.pow2(arg) - 1
+```
+
+This class uses `__init__()` to save a reference to another function, `algorithm`, as `self.pow2`.
+We arent creating any stateful `instance variables`; the value of `self.pow2` isnt expected to change. Its a common practice to se a name like _pow2 to suggest this attribute isnt expected to be used by a client of this class. The `algorithm` parameter has a type hint of `Callable[[int], int]`, which means it should be a function that takes an integer and returns an integer. The Callable type hint is from the `collections.abc` module, where its defined. An alias is also available in the `typing` module, but since PEP 585, the use of `typing.Callable` is deprecated. The function given as a Strategy object must raise 2 by the given power. Any function can be plugged in that performs this computation. Three candidate objects that we can plug into this class are as follows:
+
+```{python}
+def shifty(b: int) -> int:
+    return 1 << b
+
+def multy(b: int) -> int:
+    if b == 0:
+        return 1
+    return 2 * multy(b - 1)
+
+
+def faster(b: int) -> int:
+    if b == 0:
+        return 1
+    if b % 2 == 1:
+        return 2 * faster(b - 1)
+    t = faster(b // 2)
+    return t*t
+```
+The `shifty` function raises 2 to the desired power using a left shift of the bits. The `multy` function
+uses a naive recursive multiplication while the `faster` function uses a **divide and conquer** strategy
+that will perform $\textitalics{log_{2}(b)}$ multiplications instead of $b$ multiplications.
