@@ -1,11 +1,13 @@
 ---
-title: "Some quick notes"
+
+---
+title: Some quick notes
 format: html
 jupyter: iv_dist_dash
 execute:
   cache: true
   warning: false
-author: "Ernest Orlowski"
+author: Ernest Orlowski
 ---
 
 ```{python}

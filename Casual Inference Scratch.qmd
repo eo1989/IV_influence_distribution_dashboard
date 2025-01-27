@@ -1,15 +1,19 @@
 ---
-jupyter:
-  jupytext:
-    text_representation:
-      extension: .qmd
-      format_name: quarto
-      format_version: '1.0'
-      jupytext_version: 1.16.6
-  kernelspec:
-    display_name: IV Dist Dash
-    language: python
-    name: iv_dist_dash
+
+---
+# jupyter:
+#   jupytext:
+#     text_representation:
+#       extension: .qmd
+#       format_name: quarto
+#       format_version: "1.0"
+#       jupytext_version: 1.16.6
+#   kernelspec:
+#     display_name: IV Dist Dash
+#     language: python
+#     name: iv_dist_dash
+author: Ernest Orlowski
+jupyter: Gen
 ---
 
 ```{python}
