@@ -1,6 +1,4 @@
 ---
-
----
 title: Some quick notes
 format: html
 jupyter: iv_dist_dash

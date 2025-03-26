@@ -1,6 +1,4 @@
 ---
-
----
 # jupyter:
 #   jupytext:
 #     text_representation:
@@ -13,7 +11,7 @@
 #     language: python
 #     name: iv_dist_dash
 author: Ernest Orlowski
-jupyter: Gen
+jupyter: iv_dist_dash
 ---
 
 ```{python}
@@ -88,7 +86,7 @@ print(f"SE for Short Email: {short_email.sem():3g}")
 ```
 
 #### Confidence Intervals:
-The standard error of the estimate is a measure of confidence. For the frequentist view of statistics, we would say that our data is nothing more than a manifestation of an underlying data-generating process. This process is abstract and ideal. It is governed by true paramters that are unchanged but also unknown to us. In the context of cross-sell email, if we ran multiple experiments  and calculated the conversion rate for each of them, they would fall around the true underlying conversion rate, even if they werent exactly equal to it. 
+The standard error of the estimate is a measure of confidence. For the frequentist view of statistics, we would say that our data is nothing more than a manifestation of an underlying data-generating process. This process is abstract and ideal. It is governed by true paramters that are unchanged but also unknown to us. In the context of cross-sell email, if we ran multiple experiments  and calculated the conversion rate for each of them, they would fall around the true underlying conversion rate, even if they werent exactly equal to it.
 To better understand this, assume you have the true abstract distribution of conversion for the short cross-sell email. Because conversion is either zero or one, it follows a Bernoulli distribution and lets say that the probability of success in this distribution is 0.08. That is, whenever a customer receives the short email, it has an 8% chance of converting. Next, 10,000 experiments are ran. On each one, a sample of 100 customers is collected, and a short email is sent to abserve the average conversion, yielding a total of 10,000 conversion rates. The 10,000 conversion rates from those experiments will be distributed around th true mean of 0.08.
 
 ```{python}
