@@ -11,6 +11,7 @@ author: Ernest Orlowski
 ```{python}
 from collections.abc import Callable
 
+
 class Mersennel:
     def __init__(self, algorithm: Callable[[int], int]) -> None:
         self.pow2 = algorithm
@@ -26,10 +27,11 @@ We arent creating any stateful `instance variables`; the value of `self.pow2` is
 def shifty(b: int) -> int:
     return 1 << b
 
-def multy(b: int) -> int:
+
+def multi(b: int) -> int:
     if b == 0:
         return 1
-    return 2 * multy(b - 1)
+    return 2 * multi(b - 1)
 
 
 def faster(b: int) -> int:
@@ -38,8 +40,8 @@ def faster(b: int) -> int:
     if b % 2 == 1:
         return 2 * faster(b - 1)
     t = faster(b // 2)
-    return t*t
+    return t * t
 ```
-The `shifty` function raises 2 to the desired power using a left shift of the bits. The `multy` function
+The `shifty` function raises 2 to the desired power using a left shift of the bits. The `multi` function
 uses a naive recursive multiplication while the `faster` function uses a **divide and conquer** strategy
 that will perform $\textitalics{log_{2}(b)}$ multiplications instead of $b$ multiplications.

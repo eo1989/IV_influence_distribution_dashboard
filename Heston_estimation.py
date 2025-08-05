@@ -31,7 +31,7 @@ def OptionPriceCOSMethod(cf, CP, S0, r, tau, K, N, L):
     :type K: list[float|int]
     :param N: Number of expansion terms
     :type N:
-    :param L: Size of truncation domain ( typically L = 8 or 10)
+    :param L: Size of truncation domain (typically L = 8 or 10)
     :type L: int
     """
     if K is not np.array:
@@ -134,8 +134,10 @@ def IV(CP, mktPrice, K, T, S_0, r):
     print(f"Initial Vol = {sigma_initial:.2f}")
 
     # Some fine tuning: use already determined input for the local search
-    func = lambda sigma: np.power(BS_Call_Opt_Price(CP, S_0, K, sigma, T, r) - mktPrice, 1.0)
+    func = lambda sigma: np.power(
+        BS_Call_Opt_Price(CP, S_0, K, sigma, T, r) - mktPrice, 1.0
+    )
     _iv = jax.scipy.stats.beta
 
 
-''
+""

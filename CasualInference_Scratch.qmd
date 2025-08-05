@@ -11,23 +11,24 @@
 #     language: python
 #     name: iv_dist_dash
 author: Ernest Orlowski
-jupyter: iv_dist_dash
+jupyter: python3
 ---
 
 ```{python}
 import matplotlib.pyplot as plt
-import seaborn as sns
-import pandas as pd
 import numpy as np
+import pandas as pd
+import seaborn as sns
 
-
-data = pd.read_csv("../scratch/causal-inference-in-python-code/causal-inference-in-python/data/cross_sell_email.csv")
+data = pd.read_csv(
+    "../scratch/causal-inference-in-python-code/causal-inference-in-python/data/cross_sell_email.csv"
+)
 data
 ```
 
 ```{python}
-sns.set_theme('notebook')
-sns.set_palette(palette = 'pastel')
+sns.set_theme("notebook")
+sns.set_palette(palette="pastel")
 ```
 
 ```{python}
@@ -37,11 +38,11 @@ data2 = data.copy()
 ```
 
 ```{python}
-X = ['gender', 'age']
+X = ["gender", "age"]
 mu = data.groupby("cross_sell_email")[X].mean()
 var = data.groupby("cross_sell_email")[X].var()
 
-norm_diff = ((mu - mu.loc["no_email"]) / np.sqrt((var + var.loc["no_email"]) / 2))
+norm_diff = (mu - mu.loc["no_email"]) / np.sqrt((var + var.loc["no_email"]) / 2)
 norm_diff
 ```
 
@@ -86,20 +87,21 @@ print(f"SE for Short Email: {short_email.sem():3g}")
 ```
 
 #### Confidence Intervals:
-The standard error of the estimate is a measure of confidence. For the frequentist view of statistics, we would say that our data is nothing more than a manifestation of an underlying data-generating process. This process is abstract and ideal. It is governed by true paramters that are unchanged but also unknown to us. In the context of cross-sell email, if we ran multiple experiments  and calculated the conversion rate for each of them, they would fall around the true underlying conversion rate, even if they werent exactly equal to it.
+The standard error of the estimate is a measure of confidence. For the frequentist view of statistics, we would say that our data is nothing more than a manifestation of an underlying data-generating process. This process is abstract and ideal. It is governed by true parameters that are unchanged but also unknown to us. In the context of cross-sell email, if we ran multiple experiments  and calculated the conversion rate for each of them, they would fall around the true underlying conversion rate, even if they werent exactly equal to it.
 To better understand this, assume you have the true abstract distribution of conversion for the short cross-sell email. Because conversion is either zero or one, it follows a Bernoulli distribution and lets say that the probability of success in this distribution is 0.08. That is, whenever a customer receives the short email, it has an 8% chance of converting. Next, 10,000 experiments are ran. On each one, a sample of 100 customers is collected, and a short email is sent to abserve the average conversion, yielding a total of 10,000 conversion rates. The 10,000 conversion rates from those experiments will be distributed around th true mean of 0.08.
 
 ```{python}
 n = 100  # 100 customers
-conv_rate = 0.08 # tru conversion rate
+conv_rate = 0.08  # tru conversion rate
+
 
 def run_experiment():
-    return np.random.binomial(1, conv_rate, size = n)
+    return np.random.binomial(1, conv_rate, size=n)
+
 
 np.random.seed(42)
 
 experiments = [run_experiment().mean() for _ in range(10_000)]
-
 ```
 
 ```{python}
@@ -108,7 +110,7 @@ import matplotlib as mpl
 ```
 
 ```{python}
-mpl.use('MacOSX')
+mpl.use("MacOSX")
 ```
 
 ```{python}

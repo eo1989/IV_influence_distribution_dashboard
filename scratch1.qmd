@@ -15,14 +15,12 @@ jupyter:
 ```{python}
 import jax
 import jax.numpy as jnp
-
 import jax.scipy
+from jax import grad, jit
+from jax import random as rd
 from jax.scipy import special as sfn
 from jax.scipy.stats import norm
 
-from jax import grad, jit
-
-from jax import random as rd
 key = rd.PRNGKey(42069)
 
 # from scipy.stats import norm
@@ -39,16 +37,18 @@ S = 100.0
 K = 110.0
 r = 0.040
 sigma = 0.18
-T = 30/365
+T = 30 / 365
 ```
 
 ```{python}
 def BlackMC(S, K, r, sigma, T):
-    Z = rd.normal(key, shape=(1_000_000, ))
-    W_T = jnp.sqrt(T)*Z
-    prices = S * jnp.exp((r - 0.5*jnp.square(sigma))*T + sigma*W_T)
-    payoffs = jnp.maximum(prices - K, 0)  # or use torch.max(prices - K, torch.zeros(1_000_000))
-    return jnp.mean(payoffs) * jnp.exp(-r*T)
+    Z = rd.normal(key, shape=(1_000_000,))
+    W_T = jnp.sqrt(T) * Z
+    prices = S * jnp.exp((r - 0.5 * jnp.square(sigma)) * T + sigma * W_T)
+    payoffs = jnp.maximum(
+        prices - K, 0
+    )  # or use torch.max(prices - K, torch.zeros(1_000_000))
+    return jnp.mean(payoffs) * jnp.exp(-r * T)
 ```
 
 ```{python}
